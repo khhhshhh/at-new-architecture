@@ -13,9 +13,9 @@ define(function(require) {
     //This second set of requires is temporary, until we werite a custom mimosa module to handle it.
     require('durandal/messageBox')
     require('durandal/transitions/entrance')
-    require('viewmodels/shell')
-    require('viewmodels/welcome')
-    require('viewmodels/flickr')
+    // require('shell')
+    // require('viewmodels/welcome')
+    // require('viewmodels/flickr')
     
     //>>excludeStart("build", true);
     system.debug(true);
@@ -29,12 +29,12 @@ define(function(require) {
 
         //configure routing
         router.useConvention();
-        router.mapNav('welcome');
-        router.mapNav('flickr');
+        router.mapNav('welcome', 'welcome/index');
+        router.mapNav('flickr', 'flickr/index');
 
         app.adaptToDevice();
         
         //Show the app by setting the root view model for our application with a transition.
-        app.setRoot('viewmodels/shell', 'entrance');
+        app.setRoot('shell', 'entrance');
     });
 });

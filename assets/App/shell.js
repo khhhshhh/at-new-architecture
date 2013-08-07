@@ -8,12 +8,6 @@
             app.showMessage('Search not yet implemented...');
         },
         activate: function () {
-            // router.mapNav('welcome');
-            // router.mapNav('flickr');
-            router.map([
-                {url: 'welcome', moduleId: 'welcome', name: '欢迎'},
-                {url: 'flickr', moduleId: 'flickr', name: '相册'}
-            ]);
             return router.activate('welcome');
         }
     };
