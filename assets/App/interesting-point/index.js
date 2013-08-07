@@ -9,15 +9,11 @@ define(['data-bus/data-bus', 'durandal/app'], function(dataBus, app){
 	  }
 	};
 
-  toolbar.prototype.activate = function(){
-  	that.interestingPoints(dataBus.getInterestingPoints());
-  }
-
   toolbar.prototype.viewAttached = function (view) {
       //you can get the view after it's bound and connected to it's parent dom node if you want
   };
 
-  app.on('data-bus:interesting-points-update').then(function(interestingPoints){
+  app.on('data-bus: interesting-points-updated').then(function(interestingPoints){
   	that.interestingPoints(interestingPoints);
   });
 

@@ -7,6 +7,7 @@
             router.mapNav('flickr', 'flickr/index');
             router.mapNav('toolbar', 'toolbar/index');
             router.mapNav('interesting-point', 'interesting-point/index');
+            router.mapNav('people', 'people/index');
 
             return router.activate('welcome');
         }
