@@ -1,5 +1,5 @@
 define ['data-bus/data-bus', 'durandal/app'], (dataBus, app)->
-  class Mask
+  class MaskWidgets
     constructor: ->
 
     viewAttached: (view)->

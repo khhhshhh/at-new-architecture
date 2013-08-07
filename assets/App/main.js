@@ -6,6 +6,7 @@
 
 define(function(require) {
     var app = require('durandal/app'),
+        widget = require('durandal/widget')
         viewLocator = require('durandal/viewLocator'),
         system = require('durandal/system'),
         router = require('durandal/plugins/router');
@@ -15,6 +16,19 @@ define(function(require) {
     //>>excludeEnd("build");
 
     app.title = '@+';
+
+    // override widget default location
+    widget.convertKindToModuleId = function(kind){
+        return "widgets/" + kind + '/viewmodel';
+    }
+    widget.convertKindToViewId = function(kind){
+        return "widgets/" + kind + '/view';
+    }
+    
+    widget.registerKind('toolbar');
+    widget.registerKind('interesting-point');
+    widget.registerKind('people');
+
     app.start().then(function () {
         //Replace 'viewmodels' in the moduleId with 'views' to locate the view.
         //Look for partial views in a 'views' folder in the root.
