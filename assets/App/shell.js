@@ -2,12 +2,12 @@
 
     return {
         router: router,
-        search: function() {
-            //It's really easy to show a message box.
-            //You can add custom options too. Also, it returns a promise for the user's response.
-            app.showMessage('Search not yet implemented...');
-        },
         activate: function () {
+            router.mapNav('welcome', 'welcome/index');
+            router.mapNav('flickr', 'flickr/index');
+            router.mapNav('toolbar', 'toolbar/index');
+            router.mapNav('interesting-point', 'interesting-point/index');
+
             return router.activate('welcome');
         }
     };
