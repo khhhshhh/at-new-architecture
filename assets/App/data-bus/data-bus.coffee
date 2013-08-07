@@ -20,19 +20,19 @@ define ['durandal/app'], (app)->
 		]
 
 	updateInterestingPoints: ->
-		app.trigger 'data-bus: interesting-points-updated', [
+		app.trigger 'data-bus:interesting-points-updated', [
 			{topic: "War & Peace", messages:["Fighting in Talvocil", "Yesterday once more"]},
 			{topic: "Obvilion", messages:["Odessy Mission Failed", "The world championship"]}
 		]
 
 	updateVisitors: ->
-		app.trigger 'data-bus: visitors-updated', [
+		app.trigger 'data-bus:visitors-updated', [
 			{name: "James Bond", motto: "007 a never end legend"},
 			{name: "Charle Cooper", motto: "Dude, you have a incoming call"}
 		]
 
 	updateFriends: ->
-		app.trigger 'data-bus: friends-updated', [
+		app.trigger 'data-bus:friends-updated', [
 			{name: "马云", motto: "我被@+惊呆了……"},
 			{name: "马化腾", motto: "你们看不见我，我确定"}
 		]
