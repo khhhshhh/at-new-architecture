@@ -1,5 +1,5 @@
 define ['data-bus/data-bus', 'durandal/app'], (dataBus, app)->
-  TITLE_VISITORS = '游客' 
+  TITLE_VISITORS = '游客'  
   TITLE_FRIENDS = '好友'
 
   class People

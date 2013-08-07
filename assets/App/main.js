@@ -19,10 +19,10 @@ define(function(require) {
 
     // override widget default location
     widget.convertKindToModuleId = function(kind){
-        return "widgets/" + kind + '/viewmodel';
+        return "widgets/" + kind + '/' + kind;
     }
     widget.convertKindToViewId = function(kind){
-        return "widgets/" + kind + '/view';
+        return "widgets/" + kind + '/' + kind;
     }
     
     widget.registerKind('toolbar');
