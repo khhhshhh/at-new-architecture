@@ -50,3 +50,6 @@ what
 .tmproj
 nbproject
 Thumbs.db
+
+## ignore temp-mimosa-skeleton-holding-directory
+/temp-mimosa-skeleton-holding-directory
