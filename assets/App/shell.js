@@ -10,7 +10,7 @@
             router.mapNav('interesting-point', 'interesting-point/index');
             router.mapNav('people', 'people/index');
 
-            return router.activate('welcome');
+            return router.activate('mask');
         }
     };
 });
