@@ -15,6 +15,6 @@ define (require)->
 			@position = ko.observable(interestingPoint.position)
 
 			@click = (ip, event)-> 
-			that.trigger('interesting-point:click', that, event)
+				that.trigger('interesting-point:click', that, event)
 			
 	InterestingPoint
