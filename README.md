@@ -14,7 +14,8 @@
 
 ## 运行方式
 1. Enter the `at-new-architecture` folder 
-2. Use `make start` to start up an asset server and begin coding immediately.
+2. Use `make start` to start up an asset server(default: localhost:3000) and begin coding immediately.
+3. Any changes in folder `assets` will be immediately complied to `pulic` folder, and it will automaticly reflesh the browser.
 3. Use `make build-opt` to create your optimized application. The deployable source will be output to a 'dist' folder.
 4. See the [Mimosa](http://mimosajs.com/) project for details on how to customize the solution and use other features.
 
