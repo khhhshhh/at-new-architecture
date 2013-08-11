@@ -3,7 +3,7 @@ define (require)->
 	databus = require 'data-bus/data-bus'
 
 	class InterestingPoint
-		
+
 		constructor: (elem, settings) ->
 			events.includeIn @
 
@@ -15,6 +15,6 @@ define (require)->
 			@position = ko.observable(interestingPoint.position)
 
 			@click = (ip, event)-> 
-				that.trigger('interesting-point:click', that, event)
-		
-	return InterestingPoint
+			that.trigger('interesting-point:click', that, event)
+			
+	InterestingPoint
