@@ -1,4 +1,9 @@
-﻿define(['./viewLocator', './viewModelBinder', './viewEngine', './system', './viewModel'],
+﻿// Durandal hacking
+// Hack it for automaticly loading style for individual widget
+// by @Diajihau
+// 2013-8-9
+
+define(['./viewLocator', './viewModelBinder', './viewEngine', './system', './viewModel'],
     function (viewLocator, viewModelBinder, viewEngine, system, viewModel) {
 
     var dummyModel = {},
@@ -161,8 +166,17 @@
                             return;
                         }
                         viewModelBinder.bind(modelToBind, view);
+
                     }
+
                 }
+
+                // >> hack
+                // For connecting parent and child widget
+                if (settings.init) {
+                    settings.init(settings.model)
+                }
+                // >> /hack
 
                 composition.switchContent(element, view, settings);
             });
@@ -249,6 +263,14 @@
 
             settings.bindingContext = bindingContext;
             settings.activeView = hostState.activeView;
+
+            // >>hack
+            if (settings.style) {
+                system.acquire('css!' + settings.style).then(function (css) {
+                    system.log('Style Loaded: ' + settings.style)
+                })
+            }
+            // >>/hack
 
             if (settings.cacheViews && !settings.viewElements) {
                 settings.viewElements = hostState.childElements;

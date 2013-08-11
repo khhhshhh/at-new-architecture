@@ -1,17 +1,24 @@
-define ['data-bus/data-bus', 'durandal/app'], (dataBus, app)->
-  class Mask
-    constructor: ->
+define (require)->
+    events = require 'durandal/events'
+    databus = require 'data-bus/data-bus'
 
-    viewAttached: (view)->
-      $('.btn-change-friends').click (event)->
-        event.preventDefault();
-        dataBus.updateFriends();
-        
-      $('.btn-change-visitors').click (event)->
-        event.preventDefault();
-        dataBus.updateVisitors();
-        
-      $('.btn-change-interesting-points').click (event)->
-        event.preventDefault();
-        dataBus.updateInterestingPoints();
-        
+    class Mask
+
+        constructor: () ->
+            events.includeIn @
+            that = @
+
+            toolbar = null 
+            maskInterestingPoint = null
+
+            @initToolbar = (toolbarVM)->
+                toolbar = toolbarVM
+
+            @initMaskInterestingPoint = (maskInterestingPointVM)->         
+                maskInterestingPoint = maskInterestingPointVM
+                toolbar.on 'toolbar:active', maskInterestingPoint.showInterestingPoint
+
+        viewAttached: (view)->    
+
+
+    Mask        

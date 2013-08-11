@@ -1,11 +1,8 @@
-<section>
-	<h3 data-bind="text: description"></h3>
-	<ul data-bind="foreach: interestingPoints">
-		<li>
-			Topic: <span data-bind="text: topic"></span><br>
-			Messages: <ul data-bind="foreach: messages">
-				<li data-bind="text: $data"></li>
-			</ul>
-		</li>
-	</ul>
-</section>
+<div class='interesting-point' 
+	data-bind='
+	click: click,
+	visible: isShow(), 
+	style: position(),
+	attr: {title: content()}'>
+
+</div>

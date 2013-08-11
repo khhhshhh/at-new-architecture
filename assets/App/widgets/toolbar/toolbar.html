@@ -1,6 +1,31 @@
-<section>
-	<h3 data-bind="text: description"></h3>
-	<ul data-bind="foreach: toolIcons">
-		<li data-bind="html: $data"></li>
+<div class='toolbar'>
+
+	<div class='notifications-count' data-bind='visible: interestingPointsCount() > 0'> 
+		Notifications: <span data-bind="text: interestingPointsCount()"></span>
+	</div>
+
+	<!-- Notifications -->
+	<ul data-bind="
+		foreach: notifications, 
+		visible: activeIcon() == 'Notification' && interestingPointsCount() > 0">
+		<li>
+			<span data-bind='text: user'></span><span data-bind='text: type'></span>了你
+			<a href='#' data-bind='text: times'></a>条
+			<button data-bind='click: $parent.checkNotification'>Check</button>
+		</li>
 	</ul>
-</section>
+
+	<!-- Toolbar Icons -->
+	<ul class='tool-icons' >
+		<li class='icon' data-bind='text: atplusIcon'></li>
+		<!-- ko foreach: toolIcons -->
+		<li data-bind="
+			html: $data, 
+			click: $parent.active, 
+			css: {active: $data == $parent.activeIcon()}">
+		</li>
+		<!-- /ko -->
+	</ul>
+
+
+</div>

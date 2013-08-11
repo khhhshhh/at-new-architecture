@@ -14,7 +14,7 @@ exports.config =
       {
         folder:'Scripts'
         output:'Scripts/vendor.js'
-        order: ['jquery-1.9.1.js', 'knockout-2.2.1.js']
+        order: ['underscore-min.js', 'jquery-1.9.1.js', 'knockout-2.2.1.js']
       }
     ]
 

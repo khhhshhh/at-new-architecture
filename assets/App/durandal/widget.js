@@ -1,4 +1,9 @@
-﻿define(['./system', './composition'], function (system, composition) {
+﻿// Durandal hacking
+// Hack it for automaticly loading style for individual widget
+// by @Diajihau
+// 2013-8-9
+
+define(['./system', './composition'], function (system, composition) {
 
     var widgetPartAttribute = 'data-part',
         widgetPartSelector = '[' + widgetPartAttribute + ']';
@@ -81,6 +86,11 @@
         convertKindToViewId: function (kind) {
             return kindViewMaps[kind] || 'durandal/widgets/' + kind + '/view';
         },
+        //>> hack
+        convertKindToStyleId: function (kind) {
+            return kindViewMaps[kind] || 'durandal/widgets/' + kind + '/view';
+        },
+        //>> /hack
         beforeBind: function(element, view, settings) {
             var replacementParts = widget.getParts(element);
             var standardParts = widget.getParts(view);
@@ -96,7 +106,13 @@
 
             if (!settings.view) {
                 settings.view = this.convertKindToViewId(settings.kind);
-            }
+            } 
+
+            //>> hack
+            if (!settings.style) {
+                settings.style = this.convertKindToStyleId(settings.kind);
+            } 
+            //>> /hack
 
             settings.preserveContext = true;
             settings.beforeBind = this.beforeBind;
