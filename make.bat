@@ -7,7 +7,7 @@ if "%1"=="build" goto build
 if "%1"=="build-opt" goto buildo
 if "%1"=="buildo" goto buildo
 if "%1"=="clean" goto clean
-if "%1"=="pack" goto package
+if "%1"=="pack" goto pack
 if "%1"=="package" goto package
 if "%1"=="dist" goto dist
 if "%1"=="distribute" goto dist
