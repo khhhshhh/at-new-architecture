@@ -6,9 +6,11 @@ define (require)->
 
 		constructor: (elem, settings) ->
 			events.includeIn @
-
 			that = @ 
-			interestingPoint = @interestingPoint = settings.interestingPoint
+
+			interestingPoint = settings.interestingPoint
+
+			@interestingPoint = interestingPoint 
 
 			@isShow = ko.observable(true) 
 			@content = ko.observable(interestingPoint.content)
@@ -16,5 +18,5 @@ define (require)->
 
 			@click = (ip, event)-> 
 				that.trigger('interesting-point:click', that, event)
-			
+
 	InterestingPoint

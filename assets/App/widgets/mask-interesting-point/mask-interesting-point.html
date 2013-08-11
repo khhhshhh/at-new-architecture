@@ -1,11 +1,9 @@
 <section>
 	
 	<!-- Mask including interesting points -->	
-	<div data-bind="
-		widget: {
-			kind: 'mask', 
-			init: initMask 
-		}">
+	<div data-bind="widget: {
+					 	kind: 'mask', 
+					 	init: initMask }">
 
 		<!-- Nest all interesting-point into mask.
 			 Using Durandal's `data-part` directive. -->
@@ -13,12 +11,10 @@
 			 data-bind='foreach: $parent.interestingPoints()' 
 			 data-part='content'>
 
-			<div data-bind="
-				widget: {
-					kind: 'interesting-point',
-					init: $parents[1].initInterestingPoint,
-					interestingPoint: $data
-				}"></div>
+			<div data-bind="widget: {
+							 	kind: 'interesting-point',
+							 	init: $parents[1].initInterestingPoint,
+							 	interestingPoint: $data }"></div>
 			
 		</div>
 
