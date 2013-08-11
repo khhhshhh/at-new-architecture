@@ -38,3 +38,9 @@
 * widget之间的嵌套
 * widget之间通过events进行通信
 * 和data-bus进行数据交互
+
+## ToDos
+
+1. 自动化测试
+2. 可视化测试
+3. Routers
