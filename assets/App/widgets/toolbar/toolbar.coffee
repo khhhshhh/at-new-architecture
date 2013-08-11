@@ -32,11 +32,9 @@ define (require)->
 					that.activeIcon null
 				else 
 					that.activeIcon icon
-
-				that.trigger 'toolbar:active', icon
+					that.trigger 'toolbar:active', icon
 
 			databus.on 'data-bus:all-notifications-loaded', @notifications
 			databus.getAllNotifications()
-
 
 	Toolbar
