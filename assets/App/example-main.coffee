@@ -1,4 +1,4 @@
-﻿require.config
+require.config
     paths: 
         'text': 'durandal/amd/text'
 

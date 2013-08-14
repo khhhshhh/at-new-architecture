@@ -25,7 +25,7 @@ exports.config =
     port: 3000
     defaultServer:
       enabled: true
-      onePager: true
+      onePager: false
 
     views:
       compileWith: 'html'
