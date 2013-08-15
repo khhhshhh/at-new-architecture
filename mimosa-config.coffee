@@ -1,7 +1,7 @@
 exports.config =
   minMimosaVersion:'0.10.0'
 
-  modules: ['server', 'require', 'minify', 'live-reload', 'combine', 'mimosa-requirebuild-textplugin-include', 'skeleton']
+  modules: ['server', 'require', 'minify', 'live-reload', 'combine', 'mimosa-requirebuild-textplugin-include', 'skeleton', 'mimosa-karma']
 
   combine:
     folders: [
@@ -43,3 +43,8 @@ exports.config =
         stubModules: ['text']
         paths:
           text: 'durandal/amd/text'
+
+  karma:
+    basePath: 'public'
+    configFile: 'karma.conf.js'
+    externalConfig: true        

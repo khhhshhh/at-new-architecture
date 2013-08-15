@@ -31,6 +31,7 @@ define (require)->
 				if icon is that.activeIcon() 
 					that.activeIcon null
 				else 
+					if icon not in that.toolIcons then icon = undefined
 					that.activeIcon icon
 					that.trigger 'toolbar:active', icon
 

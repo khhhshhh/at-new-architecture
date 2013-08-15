@@ -4,6 +4,7 @@ if "%1"=="" goto start
 if "%1"=="start" goto start
 if "%1"=="startd" goto startd
 if "%1"=="build" goto build
+if "%1"=="test" goto test
 if "%1"=="build-opt" goto buildo
 if "%1"=="buildo" goto buildo
 if "%1"=="clean" goto clean
@@ -18,6 +19,10 @@ goto exit
 :start
     echo [x] Building assets and starting development server...
     mimosa watch -s
+
+:test    
+    echo [x] Using Jasmine and Krama to test... 
+    karma start
 
 :startd
     echo [x] Cleaning compiled directory, building assets and starting development server..

@@ -238,6 +238,7 @@ define(['./viewLocator', './viewModelBinder', './viewEngine', './system', './vie
             } else {
                 this.executeStrategy(element, settings);
             }
+
         },
         compose: function (element, settings, bindingContext) {
             if (typeof settings == 'string') {

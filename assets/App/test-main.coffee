@@ -1,4 +1,5 @@
 require.config
+    baseUrl: 'base/App' 
 
     paths: 
         'text': 'durandal/amd/text'
@@ -8,6 +9,7 @@ require.config
             'css': 'durandal/amd/require-css/css'
 
 define (require) ->
+    app = require 'durandal/app'
     widget = require 'durandal/widget'
     viewLocator = require 'durandal/viewLocator'
     system = require 'durandal/system'
@@ -18,6 +20,9 @@ define (require) ->
     # //>>excludeEnd "build "
 
     app.title = '@+'
+
+    $body = $(document.body)
+    $body.append('<div id="applicationHost"></div>')
 
     # // override widget default location
     widget.convertKindToModuleId =  (kind)->
