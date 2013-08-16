@@ -3,7 +3,7 @@
 // by @Diajihau
 // 2013-8-9
 
-define(['./system', './composition'], function (system, composition) {
+define(['./system', './composition', './events'], function (system, composition, events) {
 
     var widgetPartAttribute = 'data-part',
         widgetPartSelector = '[' + widgetPartAttribute + ']';
@@ -128,7 +128,51 @@ define(['./system', './composition'], function (system, composition) {
 
             var compositionSettings = widget.createCompositionSettings(settings);
             composition.compose(element, compositionSettings, bindingContext);
+        },
+        // >> hack
+        nestContainerEventMethod: function(settings) {
+            var $parent = settings.container || {};
+            var container = {};
+
+            container.__moduleId__ = $parent.__moduleId__ || '';
+
+            if (isEventObject($parent)) {
+                nestParentEventIntoContainer()
+            } else {
+                mockContainerEvent()
+            }
+
+            settings.container = container;
+            return container;
+
+            function isEventObject (obj) {
+              return obj.off && obj.on && obj.proxy && obj.trigger
+            }
+
+            function nestParentEventIntoContainer () {
+                container.on = function() {
+                    return $parent.on.apply($parent, arguments)
+                } 
+
+                container.off = function() {
+                    return $parent.off.apply($parent, arguments)
+                }
+
+                container.trigger = function() {
+                    return $parent.trigger.apply($parent, arguments)
+                }
+
+                container.proxy = function() {
+                    return $parent.trigger.apply($parent, arguments)
+                }
+            }
+
+            function mockContainerEvent () {
+                events.includeIn(container)
+            }
+
         }
+        // >> /hack
     };
 
     ko.bindingHandlers.widget = {
@@ -137,6 +181,9 @@ define(['./system', './composition'], function (system, composition) {
         },
         update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var settings = widget.getSettings(valueAccessor);
+            // >> hack
+            widget.nestContainerEventMethod(settings)
+            // >> /hack
             widget.create(element, settings, bindingContext);
         }
     };

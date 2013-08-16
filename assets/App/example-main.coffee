@@ -8,6 +8,7 @@ require.config
             'css': 'durandal/amd/require-css/css'
 
 define (require) ->
+    app = require 'durandal/app'
     widget = require 'durandal/widget'
     viewLocator = require 'durandal/viewLocator'
     system = require 'durandal/system'

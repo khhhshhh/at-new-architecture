@@ -1,28 +1,32 @@
 define (require)->
+	events = require 'durandal/events'
 
-	describe 'Testing Toolbar: ', ()->
+	describe 'User interacting with the toolbar', ()->
 
-		toolbar = null
-		Toolbar = null
+		Toolbar = require '../toolbar.js'
 
-		it 'Get toolbar view model\'s constructor and instantite a view model', ()->
+		container = 
+			__moduleId__: 'mock'
 
-			Toolbar = require '../toolbar.js'
-			expect(_.isFunction Toolbar).toBeTruthy()
+		events.includeIn container
 
-			toolbar = new Toolbar	
-			expect(_.isObject toolbar).toBeTruthy()	
+		toolbar = new Toolbar $('<div>').get(0), 
+			container: container
 
-		it 'Actived Icon should be what has been actived, e.g. `Clip`', ()->
-			toolbar.active 'Clip'
-			expect(toolbar.activeIcon()).toBe('Clip')
+		describe 'User click on toolbar\'s icons', ()->	
 
-		it 'Cannot active icon that was not in toolbar icons list', ()->
-			toolbar.active 'Hello'
-			expect(toolbar.activeIcon()).toBeUndefined()
+			it 'Active the icon `Clip`', ()->
+				container.trigger 'toolbar:active-icon', 'Clip'
+				expect(toolbar.activeIcon()).toBe('Clip')
 
-		it 'Check notification', ()->		
-			notifications = toolbar.notifications()
-			notificationsCount = notifications.length
-			toolbar.checkNotification(notifications[0])
-			expect(toolbar.notifications().length).toBe(2)
+			it 'Cannot active icon that was not in toolbar icons list', ()->
+				container.trigger 'toolbar:active-icon', 'Hello'
+				expect(toolbar.activeIcon()).toBeUndefined()
+
+		describe 'User check the notification', ()->		
+
+			it 'Check one of the notifications, notification remove from list', ()->		
+				notifications = toolbar.notifications()
+				notificationsCount = notifications.length
+				container.trigger 'toolbar:check-notification', notifications[0]
+				expect(toolbar.notifications().length).toBe(2)

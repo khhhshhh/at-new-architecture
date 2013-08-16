@@ -7,16 +7,15 @@ define (require)->
 		constructor: (elem, settings) ->
 			events.includeIn @
 			that = @ 
+			container = settings.container
 
 			interestingPoint = settings.interestingPoint
-
-			@interestingPoint = interestingPoint 
 
 			@isShow = ko.observable(true) 
 			@content = ko.observable(interestingPoint.content)
 			@position = ko.observable(interestingPoint.position)
 
 			@click = (ip, event)-> 
-				that.trigger('interesting-point:click', that, event)
+				container.trigger 'interesting-point:click', that.position(), that.content(), event
 
 	InterestingPoint

@@ -4,39 +4,40 @@ define (require)->
 
 	class Mask
 
-		constructor: () ->
+		constructor: (elem, settings) ->
 			events.includeIn this
 			that = this
+			container = settings.container
 
 			@isShow = ko.observable true
 			@isClipShow = ko.observable false
 			@clipStyle = ko.observable {}
 
-			@show = ()-> 
+			container.on 'mask:show-mask', ()-> 
 				that.isShow true
-				that.trigger 'mask:show'
-			
 
-			@hide = ()-> 
+			container.on 'mask:hide-mask', ()-> 
 				that.isShow false
-				that.trigger 'mask:hide'
-			
 
-			@setClipStyle = (style)-> 
+			container.on 'mask:set-clip-style', (style)->
 				that.clipStyle style
-				that.trigger 'mask:clip-reset'
 			
-
-			@showClip = ()-> 
+			container.on 'mask:show-clip', ()->
 				that.isClipShow true
-				that.trigger 'mask:clip-show'
-			
 
-			@hideClip = ()-> 
+			container.on 'mask:hide-clip', ()->
 				that.isClipShow false
-				that.trigger 'mask:clip-hide'
 
-			@clickOnMask = ()-> 
-				that.trigger 'mask:click'
-		
+			container.on 'mask:is-show', ()->	
+				that.isShow()
+
+			container.on 'mask:is-clip-show', (callback)->	
+				callback that.isClipShow()
+
+			container.on 'mask:get-clip-style', (callback)->	
+				callback that.clipStyle()
+
+			@clickOnMask = (mask, event)-> 
+				container.trigger 'mask:click-on-mask', event
+
 	Mask

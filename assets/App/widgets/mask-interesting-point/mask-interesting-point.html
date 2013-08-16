@@ -3,7 +3,7 @@
 	<!-- Mask including interesting points -->	
 	<div data-bind="widget: {
 					 	kind: 'mask', 
-					 	init: initMask }">
+					 	container: $data}">
 
 		<!-- Nest all interesting-point into mask.
 			 Using Durandal's `data-part` directive. -->
@@ -13,7 +13,7 @@
 
 			<div data-bind="widget: {
 							 	kind: 'interesting-point',
-							 	init: $parents[1].initInterestingPoint,
+							 	container: $parents[1],
 							 	interestingPoint: $data }"></div>
 			
 		</div>

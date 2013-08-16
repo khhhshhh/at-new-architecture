@@ -4,40 +4,36 @@ define (require)->
 
     class MaskInterestingPoint
 
-        constructor: () ->
-            # 1. 为widget添加events，缓存this
+        constructor: (elem, settings) ->
             events.includeIn @
             that = @
+            container = settings.container
 
-            # 2. 初始化局部变量
             mask = null
 
-            # 3. 初始化vm静态属性
-            # do stuff here
-
-            # 4. 初始化vm动态属性(observable)
             @interestingPoints = ko.observableArray()
 
-            # 5. 初始化依赖widget以及绑定它们之间的事件
-            @initMask = (maskVM)->        
-                mask = maskVM
-                mask.on 'mask:click', that.backToPreviousState
+            backToPreviousState = ()->
+                that.trigger 'mask:is-clip-show', (isClipShow)->
+                    if isClipShow then that.trigger 'mask:hide-clip'
+                    else 
+                        that.trigger 'mask:hide-mask'
+                        container.trigger 'mask-interesting-point:mask-hide'
 
-            @initInterestingPoint = (interestingPoint)->    
-                interestingPoint.on 'interesting-point:click', (interestingPoint, event)->
-                    event.stopPropagation()
-                    mask.showClip()
-                    mask.setClipStyle interestingPoint.position()
+            @on 'interesting-point:click', (ipPosition, ipContent, event)->
+                event.stopPropagation()
+                that.trigger 'mask:set-clip-style', ipPosition
+                that.trigger 'mask:show-clip'
 
-            # 6. 初始化vm方法
-            @backToPreviousState = ()->        
-                if mask.isClipShow() then mask.hideClip()
-                else mask.hide()
+            @on 'mask:click-on-mask', (event)->
+                backToPreviousState()
 
-            @showInterestingPoint = (type)->    
-                mask.show()
+            container.on 'mask-interesting-point:show-mask', ()->    
+                that.trigger 'mask:show-mask'
 
-            # 7. 从databus中获取数据    
+            container.on 'mask-interesting-point:back-previous-state', ()->    
+                backToPreviousState()
+
             databus.on 'data-bus:interesting-points-loaded', that.interestingPoints
             databus.getInterestingPoints()
 
