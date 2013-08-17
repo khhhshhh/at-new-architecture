@@ -3,7 +3,7 @@ define (require)->
 
 	describe 'User interacting with the toolbar', ()->
 
-		Toolbar = require '../toolbar.js'
+		Toolbar = require 'widgets/toolbar/toolbar'
 
 		container = 
 			__moduleId__: 'mock'

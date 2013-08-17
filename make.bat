@@ -12,6 +12,7 @@ if "%1"=="pack" goto pack
 if "%1"=="package" goto package
 if "%1"=="dist" goto dist
 if "%1"=="distribute" goto dist
+if "%1"=="widget" goto widget
 
 echo make: *** No rule to make target `%1'.  Stop.
 goto exit
@@ -51,5 +52,8 @@ goto exit
     rmdir /S /Q dist
     xcopy /S /Q public dist\
     copy views\index-optimize.html dist\index.html
+
+:widget    
+    call node make-widget.js "%2"
 
 :exit
