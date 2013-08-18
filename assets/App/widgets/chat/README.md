@@ -1,5 +1,0 @@
-# Chat
-
-## Description
-
-## Events

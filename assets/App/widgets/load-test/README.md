@@ -1,5 +1,0 @@
-# LoadTest
-
-## Description
-
-## Events

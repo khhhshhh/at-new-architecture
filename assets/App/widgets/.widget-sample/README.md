@@ -1,5 +1,0 @@
-# Widget Name
-
-## Description
-
-## Events
