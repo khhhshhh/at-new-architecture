@@ -10,14 +10,23 @@ var yellow = '\x1B[33m'
 
 var widget = process.argv[2]
 
-var COMMAND_ERROR = "\nERROR: Please Use :\n\n" +
-				  	"\t" + blue + "make widget yourWidgeName\n\n"
-				  	 + reset + "to create a widget\n"
+var COMMAND_ERROR = 
+	"\nERROR: Please Use :\n\n" +
+	"\t" + blue + "make widget yourWidgeName\n\n" + reset + 
+	"to create a widget\n"
 
-var WIDGET_EXISTS_ERROR = red + 'ERROR: Widget ' + widget + ' exists, please pick another name' + reset			  	  
-var SAMPLE_NOT_FOUND_ERROR = red + 'ERROR: Widget sample directory not found' + reset
+
+var WIDGET_EXISTS_ERROR =
+	 red + 'ERROR: Widget ' + 
+	 widget + ' exists, please pick another name' + reset
+
+
+var SAMPLE_NOT_FOUND_ERROR = 
+	red + 'ERROR: Widget sample directory not found' + reset
+
 
 var SAMPLE_DIR = './assets/App/widgets/.widget-boilerplate'
+
 
 if (widget === '') {
 	error(COMMAND_ERROR)
@@ -71,10 +80,15 @@ function createWidgetFiles (widget) {
 
 function tranportFile (widget, file) {
 	var originFile = readFileInSample(file)
-	var widgetClassName = widget[0].toUpperCase() + widget.slice(1)
+	,	targetDir = getWidgetDirFromName(widget) 
 
-	var targetDir = getWidgetDirFromName(widget) 
-	var targetFileData = originFile.replace(/widgetName/g, widget).replace(/WidgetName/g, widgetClassName)
+	var	widgetVariable = toCamelCase(widget)
+	,	widgetClassName = capitalize(widgetVariable)
+
+	var targetFileData = originFile
+		.replace(/widgetName/g, widget)
+		.replace(/widgetCamelName/g, widgetVariable)
+		.replace(/WidgetName/g, widgetClassName)
 
 	writeFileInWidget(file, targetFileData)
 }
@@ -85,8 +99,9 @@ function readFileInSample (file) {
 
 function writeFileInWidget (file, data) {
 	var targetDir = getWidgetDirFromName(widget)
-	var file = file.replace('widget', widget)
-	var targetFile = path.join(targetDir, file)
+	,	file = file.replace('widget', widget)
+	,	targetFile = path.join(targetDir, file)
+
 	fs.createWriteStream(targetFile).write(data)
 	console.log(green + 'Creating ' + targetFile + '...' + reset)
 }
@@ -95,10 +110,18 @@ function makeDir (dir) {
 	fs.mkdirSync(dir)
 }
 
-function copy (src, dest) {
-	fs.createReadStream(src).pipe(fs.createWriteStream(dest))
-}
-
 function getWidgetDirFromName (widget) {
 	return './assets/App/widgets/' + widget
+}
+
+function capitalize (words) {
+	return words[0].toUpperCase() + words.slice(1)
+}
+
+function toCamelCase(name) {
+	var SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g
+
+	return name.replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
+		  return offset ? letter.toUpperCase() : letter
+	})
 }

@@ -15,7 +15,7 @@ define (require) ->
     router = require 'durandal/plugins/router'
     
     # //>>excludeStart "build", tru e
-    system.debug true
+    system.debug false
     # //>>excludeEnd "build "
 
     app.title = '@+'

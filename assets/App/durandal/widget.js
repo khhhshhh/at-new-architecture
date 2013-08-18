@@ -2,6 +2,8 @@
 // Hack it for automaticly loading style for individual widget
 // by @Diajihau
 // 2013-8-9
+var timeStamp = window.timeStamp = startTime = +new Date 
+var count = window.count = 0 
 
 define(['./system', './composition', './events'], function (system, composition, events) {
 
@@ -131,6 +133,14 @@ define(['./system', './composition', './events'], function (system, composition,
         },
         // >> hack
         nestContainerEventMethod: function(settings) {
+
+            if (typeof settings === 'string') {
+                settings = {
+                    kind: settings,
+                    container: {}
+                };
+            }
+
             var $parent = settings.container || {};
             var container = {};
 
@@ -143,7 +153,7 @@ define(['./system', './composition', './events'], function (system, composition,
             }
 
             settings.container = container;
-            return container;
+            return settings;
 
             function isEventObject (obj) {
               return obj.off && obj.on && obj.proxy && obj.trigger
@@ -175,6 +185,17 @@ define(['./system', './composition', './events'], function (system, composition,
         // >> /hack
     };
 
+    function test (arguments) {
+        thisTime = +new Date
+        count++
+
+        if (count === 1) startTime = thisTime 
+
+        dist = thisTime - startTime
+        // console.log(dist)
+        timeStamp = thisTime 
+    }
+
     ko.bindingHandlers.widget = {
         init: function() {
             return { controlsDescendantBindings: true };
@@ -182,9 +203,10 @@ define(['./system', './composition', './events'], function (system, composition,
         update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var settings = widget.getSettings(valueAccessor);
             // >> hack
-            widget.nestContainerEventMethod(settings)
+            settings = widget.nestContainerEventMethod(settings)
             // >> /hack
             widget.create(element, settings, bindingContext);
+            test()
         }
     };
 

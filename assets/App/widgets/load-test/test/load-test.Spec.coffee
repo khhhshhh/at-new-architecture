@@ -1,14 +1,14 @@
 define (require)->
 	events = require 'durandal/events'
 
-	describe 'Testing WidgetName', ()->
+	describe 'Testing LoadTest', ()->
 
-		WidgetName = require 'widgets/widgetName/widgetName'
+		LoadTest = require 'widgets/load-test/load-test'
 
 		container = 
 			__moduleId__: 'mock'
 
 		events.includeIn container
 
-		widgetCamelName = new WidgetName $('<div>').get(0), 
+		loadTest = new LoadTest $('<div>').get(0), 
 			container: container

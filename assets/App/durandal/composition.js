@@ -3,8 +3,8 @@
 // by @Diajihau
 // 2013-8-9
 
-define(['./viewLocator', './viewModelBinder', './viewEngine', './system', './viewModel'],
-    function (viewLocator, viewModelBinder, viewEngine, system, viewModel) {
+define(['./viewLocator', './viewModelBinder', './viewEngine', './system', './viewModel', './events'],
+    function (viewLocator, viewModelBinder, viewEngine, system, viewModel, events) {
 
     var dummyModel = {},
         activeViewAttributeName = 'data-active-view';
@@ -266,9 +266,16 @@ define(['./viewLocator', './viewModelBinder', './viewEngine', './system', './vie
             settings.activeView = hostState.activeView;
 
             // >>hack
-            if (settings.style) {
-                system.acquire('css!' + settings.style).then(function (css) {
-                    system.log('Style Loaded: ' + settings.style)
+            if (!settings.container) {
+                settings.container = {}
+                events.includeIn(settings.container)
+            }
+
+            var style = settings.style || settings.model
+
+            if (settings.style || settings.loadStyle) {
+                system.acquire('css!' + style).then(function (css) {
+                    system.log('Style Loaded: ' + style)
                 })
             }
             // >>/hack
