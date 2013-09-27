@@ -1,0 +1,9 @@
+{
+  "name": "at-plus",
+  "version": "0.0.0",
+  "description": "make-widget-doc",
+  "devDependencies": {
+    "ejs": "*",
+    "underscore": "*"
+  }
+}
